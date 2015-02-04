@@ -49,3 +49,5 @@ app.post('/api/off', function(req, res){
 		}
 	]);
 });
+
+app.listen(app.get('port'));
