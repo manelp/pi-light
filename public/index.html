@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Nycum's Garage</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimal-ui">
+	<link rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png">
+	<style>
+	html, body, div, button {
+		margin: 0;
+		padding: 0;
+		font-family: "Helvetica Neue";
+	}
+	body {
+		background-color: #EAEAEA;
+	}
+	button {
+		background-color: #FFFFFF;
+		border: 1px solid #C9C9C9;
+		border-right: 0px solid #000;
+		border-left: 0px solid #000;
+		font-size: 1.5em;
+		margin-top: 20px;
+		width: 100%;
+		height: 44px;
+	}
+	</style>
+</head>
+<body>
+	<button onclick="turnOn()">On</button>
+	<button onclick="turnOff()">Off</button>
+
+	<script>
+	function post(url) {
+		var request = new XMLHttpRequest();
+		request.open('POST', url, true);
+		request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+		request.send({});		
+	}
+	function get(url) {
+		var request = new XMLHttpRequest();
+		request.open('GET', url, true);
+		request.send({});
+		request.onreadystatechange = function(){
+			if (xhr.readyState == 4) {
+		    		    
+		    }	
+		}
+	}
+	function turnOn() { post("/api/on"); }
+	function turnOff() { post("/api/off"); }
+	function getStatus() { get("/api/status"); }
+	</script>
+
+</body>
+</html>
