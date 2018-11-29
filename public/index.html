@@ -27,29 +27,17 @@
 	</style>
 </head>
 <body>
-	<button onclick="turnOn()">On</button>
-	<button onclick="turnOff()">Off</button>
+	<button onclick="turnOn()">HODOR</button>
 
 	<script>
 	function post(url) {
 		var request = new XMLHttpRequest();
 		request.open('POST', url, true);
 		request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-		request.send({});		
-	}
-	function get(url) {
-		var request = new XMLHttpRequest();
-		request.open('GET', url, true);
 		request.send({});
-		request.onreadystatechange = function(){
-			if (xhr.readyState == 4) {
-		    		    
-		    }	
-		}
 	}
-	function turnOn() { post("/api/on"); }
-	function turnOff() { post("/api/off"); }
-	function getStatus() { get("/api/status"); }
+
+	function turnOn() { post("/api/open"); }
 	</script>
 
 </body>
