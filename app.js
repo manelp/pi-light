@@ -2,34 +2,29 @@ var express = require('express'),
 	path = require('path'),
 	async = require('async'),
 	gpio = require('pi-gpio'),
+	sleep = require('sleep'),
 	app = express();
+
 
 app.set('port', process.env.PORT || 3000);
 
 app.use('/', express.static(__dirname + '/public'));
 
-//export pin
-(function() {	
-	gpio.open(16, "out", function(err) {});
-})();
-
-app.post('/api/on', function(req, res){
+app.post('/api/open', function(req, res){
 	async.series([
+		function(callback) {
+			gpio.open(17, "out", function(err) {});
+			gpio.write(17, 1, function(){});
+		},
 		function(callback) {
 			// Turn the relay on
-			gpio.write(16, 0, callback);
+			gpio.write(17, 0, callback);
+			sleep.msleep(500);
+			gpio.write(17, 1, callback);
 		},
-		function(err, results) {
-			res.json("ok");
-		}
-	]);
-});
-
-app.post('/api/off', function(req, res){
-	async.series([
 		function(callback) {
-			// Turn the relay off
-			gpio.write(16, 1, callback);
+			// Turn the relay on
+			gpio.close(17, callback);
 		},
 		function(err, results) {
 			res.json("ok");
